@@ -31,6 +31,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'slim'
 gem 'bootstrap', '~> 4.1.1'
+gem 'trestle'
+gem 'trestle-auth'
 
 group :development, :test do
   gem 'pry'
