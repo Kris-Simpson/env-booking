@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_07_204925) do
+ActiveRecord::Schema.define(version: 2018_05_11_213935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "booked_environments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "environment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["environment_id"], name: "index_booked_environments_on_environment_id"
+    t.index ["user_id"], name: "index_booked_environments_on_user_id"
+  end
+
+  create_table "environments", force: :cascade do |t|
+    t.string "name"
+    t.integer "state", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,4 +45,6 @@ ActiveRecord::Schema.define(version: 2018_05_07_204925) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "booked_environments", "environments"
+  add_foreign_key "booked_environments", "users"
 end
