@@ -1,22 +1,13 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  = link_to 'Environment Booking', root_path, class: 'navbar-brand'
+  strong
+    = link_to 'Environment Booking', root_path, class: 'navbar-brand'
 
   button.navbar-toggler type='button' data-toggle='collapse' data-target='#navbarMenu' aria-controls='navbarMenu' aria-expanded='false' aria-label='Toggle navigation'
     span.navbar-toggler-icon
 
   #navbarMenu.collapse.navbar-collapse
-    ul.navbar-nav
-      li.nav-item class=(active_link('home'))
-        = link_to 'Home', root_path, class: 'nav-link'
-
-      - unless user_signed_in?
-        li.nav-item class=(active_link('sessions'))
-          = link_to 'Sign In', new_user_session_path, class: 'nav-link'
-        li.nav-item class=(active_link('registrations'))
-          = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
-
-    - if user_signed_in?
-      ul.navbar-nav.ml-auto
+    ul.navbar-nav.ml-auto
+      - if user_signed_in?
         span.navbar-text
           | Logged in as
           '
@@ -26,3 +17,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
           = link_to 'Edit', edit_user_registration_path, class: 'nav-link'
         li.nav-item
           = link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link'
+      - else
+        li.nav-item class=(active_link('sessions'))
+          = link_to 'Sign In', new_user_session_path, class: 'nav-link'
+        li.nav-item class=(active_link('registrations'))
+          = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'

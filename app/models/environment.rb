@@ -1,7 +1,11 @@
 class Environment < ApplicationRecord
   enum state: %i(free booked)
 
-  has_one :booked_environment, dependent: :destroy
+  has_many :booked_environments, dependent: :destroy
 
   validates :name, presence: true
+
+  def current_booking
+    booked_environments.first
+  end
 end
