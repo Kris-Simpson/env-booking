@@ -1,12 +1,8 @@
 tr
+  td = environment_counter + 1
   td = environment.name
-  td
-    - if environment.current_booking
-      | Booked by
-      '
-      strong #{environment.current_booking.user.email}
-    - else
-      | Free
+  td id=("environment_#{environment.id}")
+    = environment.status_message
   td.text-center
     = link_to 'Manage', environment_path(environment), remote: true,
                                                        class: 'btn btn-sm btn-success',

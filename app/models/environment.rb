@@ -8,4 +8,12 @@ class Environment < ApplicationRecord
   def current_booking
     booked_environments.first
   end
+
+  def status_message
+    if current_booking
+      "Booked by #{current_booking.user.email}"
+    else
+      'Free'
+    end
+  end
 end

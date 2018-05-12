@@ -1,10 +1,22 @@
 class BookedEnvironmentsController < ApplicationController
   def create
-    current_user.booked_environments.create!(booked_environment_params)
+    @booking = current_user.booked_environments.create!(booked_environment_params)
+    @environment = @booking.environment
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def destroy
-    current_user.booked_environments.where(booked_environment_params).first.destroy
+    @booking = current_user.booked_environments.where(booked_environment_params).first.destroy
+    @environment = @booking.environment
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private

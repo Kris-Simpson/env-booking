@@ -1,0 +1,8 @@
+$('#booking-management-tbody').append("<%= j render @booking %>");
+
+<% if @environment.booked_environments.present? %>
+  $('#modal-body').find('table').removeClass('d-none');
+  $('#modal-body').find('.be-the-first-msg').addClass('d-none');
+
+  $('#environment_<%= @environment.id %>').html('<%= @environment.status_message %>');
+<% end %>
