@@ -5,10 +5,6 @@ class Environment < ApplicationRecord
 
   validates :name, presence: true
 
-  def current_booking
-    booked_environments.first
-  end
-
   def status_message
     env = booked_environments.in_progress
                              .where('"from" < :current AND "to" > :current', current: Time.current)

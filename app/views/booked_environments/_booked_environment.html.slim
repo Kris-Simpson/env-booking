@@ -1,6 +1,6 @@
 tr id=("booked_environment_#{booked_environment.id}")
   td = booked_environment.user.email
-  td = "From #{booked_environment.from.strftime("%I:%M%P")} to #{booked_environment.to.strftime("%I:%M%P")}"
+  td = "From #{booked_environment.from.localtime.strftime("%I:%M%P")} to #{booked_environment.to.localtime.strftime("%I:%M%P")}"
   td.text-center
     - if current_user.booked_environments.include?(booked_environment)
       = link_to 'Cancel', booked_environment_path(booked_environment),
