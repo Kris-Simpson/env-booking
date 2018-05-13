@@ -2,7 +2,11 @@
   "name": "env_booking",
   "private": true,
   "dependencies": {
+    "@rails/webpacker": "3.5",
     "jstimezonedetect": "^1.0.6",
     "timepicker": "^1.11.12"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
   }
 }
