@@ -1,4 +1,5 @@
 $('#booking-management-tbody').find('#booked_environment_<%= @booking.id %>').remove();
+$('#errors').addClass('d-none');
 
 $('#environment_<%= @environment.id %>').html('<%= @environment.status_message %>');
 

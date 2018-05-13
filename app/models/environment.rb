@@ -11,10 +11,10 @@ class Environment < ApplicationRecord
                              .first
 
     if env
-      "Booked by #{env.user.email} until #{env.to.localtime.strftime('%I:%M%P')}"
+      "Booked by #{env.user.email} until #{env.to.strftime('%I:%M%P')}"
     else
       env = booked_environments.in_progress.where('"from" > :current', current: Time.current).first
-      suffix = "until #{env.from.localtime.strftime('%I:%M%P')}" if env
+      suffix = "until #{env.from.strftime('%I:%M%P')}" if env
 
       "Free #{suffix}"
     end
