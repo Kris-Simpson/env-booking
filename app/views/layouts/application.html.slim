@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title Environment Booking
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    = render 'shared/navbar'
+
+    .container.additional-container-pad
+      - if notice
+        .alert.alert-success = notice
+      - if alert
+        .alert.alert-danger = alert
+
+      = yield

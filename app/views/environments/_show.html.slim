@@ -1,0 +1,37 @@
+.modal-header
+  h5#exampleModalLabel.modal-title = @environment.name
+  button.close type='button' data-dismiss='modal' aria-label='Close'
+    span aria-hidden='true' &times;
+
+.modal-body#modal-body
+  table.table.table-striped class=('d-none' unless @booked_environments.present?)
+    thead.thead-dark
+      tr
+        th.col-6 Booker
+        th.col-4 Period
+        th.col-2.text-center Action
+
+    tbody#booking-management-tbody
+      = render @booked_environments
+
+  .be-the-first-msg.text-center class=('d-none' if @booked_environments.present?)
+    .text-muted Be the first who book this environment!
+
+  .additional-top-mar
+    .text-center
+      = form_tag(booked_environments_path, method: :post, remote: true) do
+        = hidden_field_tag(:environment_id, @environment.id)
+        | Today from:
+        '
+        = text_field_tag(:from, '', id: 'timepicker-start')
+        '
+        | to:
+        '
+        = text_field_tag(:to, '', id: 'timepicker-end')
+        '
+        = submit_tag('Book', class: 'btn btn-success')
+
+    #errors.alert.alert-danger.additional-top-mar.d-none
+
+.modal-footer
+  button.btn.btn-secondary type='button' data-dismiss='modal' Close

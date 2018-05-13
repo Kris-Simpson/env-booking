@@ -1,0 +1,20 @@
+$('#modal-window').find('.modal-content').html("<%= j render 'show' %>");
+$('#modal-window').modal('show');
+
+$('#timepicker-start').timepicker({
+  'useSelect': true,
+  'step': 60,
+  'disableTimeRanges': [
+    // ['1am', '2am'],
+    // ['3am', '4:00am']
+  ]
+});
+
+$('#timepicker-end').timepicker({
+  'useSelect': true,
+  'step': 60,
+  'disableTimeRanges': [
+    // ['1am', '2am'],
+    // ['3am', '4:00am']
+  ]
+});

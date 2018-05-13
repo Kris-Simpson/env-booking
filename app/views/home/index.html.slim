@@ -1,0 +1,17 @@
+- if @environments.present?
+  table.table.table-striped
+    thead.thead-dark
+      tr
+        th.col-1 #
+        th.col-3 Name
+        th.col-6 Status
+
+        - if user_signed_in?
+          th.col-2.text-center Action
+
+    tbody
+      = render @environments
+
+#modal-window.modal.fade tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'
+  .modal-dialog.modal-lg role='document'
+    .modal-content
