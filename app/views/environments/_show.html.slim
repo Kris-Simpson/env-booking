@@ -4,7 +4,7 @@
     span aria-hidden='true' &times;
 
 .modal-body#modal-body
-  table.table.table-striped class=('d-none' unless @environment.booked_environments.present?)
+  table.table.table-striped class=('d-none' unless @booked_environments.present?)
     thead.thead-dark
       tr
         th.col-6 Booker
@@ -12,9 +12,9 @@
         th.col-2.text-center Action
 
     tbody#booking-management-tbody
-      = render @environment.booked_environments
+      = render @booked_environments
 
-  .be-the-first-msg.text-center class=('d-none' if @environment.booked_environments.present?)
+  .be-the-first-msg.text-center class=('d-none' if @booked_environments.present?)
     .text-muted Be the first who book this environment!
 
   .additional-top-mar
