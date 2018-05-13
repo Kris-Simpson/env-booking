@@ -10,21 +10,17 @@ class Environment < ApplicationRecord
   end
 
   def status_message
-    envs = booked_environments.in_progress
-                              .where('"from" < :current AND "to" > :current', current: Time.current)
+    env = booked_environments.in_progress
+                             .where('"from" < :current AND "to" > :current', current: Time.current)
+                             .first
 
-    if envs.present?
-      env = envs.first
-
+    if env
       "Booked by #{env.user.email} until #{env.to.localtime.strftime('%I:%M%P')}"
     else
       env = booked_environments.in_progress.where('"from" > :current', current: Time.current).first
+      suffix = "until #{env.from.localtime.strftime('%I:%M%P')}" if env
 
-      if env
-        "Free until #{env.from.localtime.strftime('%I:%M%P')}"
-      else
-        'Free'
-      end
+      "Free #{suffix}"
     end
   end
 end
