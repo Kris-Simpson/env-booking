@@ -1,8 +1,8 @@
 $('#booking-management-tbody').find('#booked_environment_<%= @booking.id %>').remove();
 
+$('#environment_<%= @environment.id %>').html('<%= @environment.status_message %>');
+
 <% unless @environment.booked_environments.present? %>
   $('#modal-body').find('table').addClass('d-none');
   $('#modal-body').find('.be-the-first-msg').removeClass('d-none');
-
-  $('#environment_<%= @environment.id %>').html('<%= @environment.status_message %>');
 <% end %>

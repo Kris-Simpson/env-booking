@@ -3,8 +3,10 @@ tr
   td = environment.name
   td id=("environment_#{environment.id}")
     = environment.status_message
-  td.text-center
-    = link_to 'Manage', environment_path(environment), remote: true,
-                                                       class: 'btn btn-sm btn-success',
-                                                       data: { 'toggle' => 'modal',
-                                                               'target' => '#modal-window' }
+
+  - if user_signed_in?
+    td.text-center
+      = link_to 'Manage', environment_path(environment), remote: true,
+                                                         class: 'btn btn-sm btn-success',
+                                                         data: { 'toggle' => 'modal',
+                                                                 'target' => '#modal-window' }

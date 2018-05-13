@@ -11,13 +11,17 @@ class BookedEnvironment < ApplicationRecord
 
   validate :time_overlap, on: :create
 
+  scope :in_progress, -> { where(from: Time.current..DateTime::Infinity.new)
+                          .or(where(to: Time.current..DateTime::Infinity.new)) }
+
   private
 
   def time_overlap
     booking_time_ranges = self.class.where(environment: environment).select(:from, :to)
-    time_ranges = booking_time_ranges.map { |record| record.from..(record.to - 1.minute) }
+    time_ranges = booking_time_ranges.map { |record| record.from..record.to }
 
-    errors.add(:from, "can't overlap existing bookings") if time_ranges.any? { |range| range === from }
-    errors.add(:to, "can't overlap existing bookings") if time_ranges.any? { |range| range === to }
+    if time_ranges.any? { |range| range === (to - 1.second) or range === (from + 1.second) }
+      errors.add(:time_range, "can't overlap existing bookings")
+    end
   end
 end
