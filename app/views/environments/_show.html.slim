@@ -16,9 +16,17 @@
   .be-the-first-msg.text-center class=('d-none' if @environment.booked_environments.present?)
     .text-muted Be the first who book this environment!
 
+  .additional-top-mar
+    .text-center
+      = form_tag(booked_environments_path, method: :post, remote: true) do
+        = hidden_field_tag(:environment_id, @environment.id)
+        = text_field_tag(:from, '', id: 'timepicker-start')
+        '
+        = text_field_tag(:to, '', id: 'timepicker-end')
+        '
+        = submit_tag('Book', class: 'btn btn-success')
+
+    #errors.alert.alert-danger.additional-top-mar.d-none
+
 .modal-footer
-  = link_to 'Book', booked_environments_path(environment_id: @environment.id),
-                    method: :post,
-                    remote: true,
-                    class: 'btn btn-success'
   button.btn.btn-secondary type='button' data-dismiss='modal' Close

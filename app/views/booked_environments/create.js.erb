@@ -1,8 +1,20 @@
-$('#booking-management-tbody').append("<%= j render @booking %>");
+<% if @booking.valid? %>
+  <% environment = @booking.environment %>
 
-<% if @environment.booked_environments.present? %>
-  $('#modal-body').find('table').removeClass('d-none');
-  $('#modal-body').find('.be-the-first-msg').addClass('d-none');
+  $('#booking-management-tbody').append("<%= j render @booking %>");
 
-  $('#environment_<%= @environment.id %>').html('<%= @environment.status_message %>');
+  <% if environment.booked_environments.present? %>
+    $('#modal-body').find('table').removeClass('d-none');
+    $('#modal-body').find('.be-the-first-msg').addClass('d-none');
+    $('#errors').addClass('d-none');
+
+    $('#environment_<%= environment.id %>').html('<%= environment.status_message %>');
+  <% end %>
+<% else %>
+  $('#errors').removeClass('d-none');
+  $('#errors').empty();
+
+  <% @booking.errors.full_messages.each do |message| %>
+    $('#errors').append('<p class="without-mar"><%= message %></p>');
+  <% end %>
 <% end %>

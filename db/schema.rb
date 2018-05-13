@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_11_223803) do
+ActiveRecord::Schema.define(version: 2018_05_12_222037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2018_05_11_223803) do
     t.bigint "environment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "from", null: false
+    t.datetime "to", null: false
     t.index ["environment_id"], name: "index_booked_environments_on_environment_id"
     t.index ["user_id"], name: "index_booked_environments_on_user_id"
   end

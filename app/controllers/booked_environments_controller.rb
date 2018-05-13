@@ -1,7 +1,6 @@
 class BookedEnvironmentsController < ApplicationController
   def create
-    @booking = current_user.booked_environments.create!(booked_environment_params)
-    @environment = @booking.environment
+    @booking = current_user.booked_environments.create(booked_environment_params)
 
     respond_to do |format|
       format.html
@@ -22,6 +21,6 @@ class BookedEnvironmentsController < ApplicationController
   private
 
   def booked_environment_params
-    params.permit(:id, :environment_id)
+    params.permit(:id, :environment_id, :from, :to)
   end
 end

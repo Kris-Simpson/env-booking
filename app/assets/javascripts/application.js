@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require popper
 //= require bootstrap
+//= require timepicker
 //= require_tree .

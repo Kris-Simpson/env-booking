@@ -3,10 +3,6 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :environments, only: [:show] do
-    post :book
-    post :cancel
-  end
-
+  resources :environments, only: :show
   resources :booked_environments, only: %i(create destroy)
 end

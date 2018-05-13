@@ -1,5 +1,7 @@
 {
   "name": "env_booking",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "timepicker": "^1.11.12"
+  }
 }
