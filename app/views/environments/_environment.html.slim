@@ -2,7 +2,7 @@ tr
   td = environment_counter + 1
   td = environment.name
   td id=("environment_#{environment.id}")
-    = environment.status_message
+    = status_message(environment)
 
   - if user_signed_in?
     td.text-center

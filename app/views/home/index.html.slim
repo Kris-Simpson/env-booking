@@ -3,11 +3,11 @@
     thead.thead-dark
       tr
         th.col-1 #
-        th.col-3 Name
-        th.col-6 Status
+        th.col-2 Name
+        th.col-8 Status
 
         - if user_signed_in?
-          th.col-2.text-center Action
+          th.col-1.text-center Action
 
     tbody
       = render @environments

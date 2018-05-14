@@ -8,7 +8,7 @@
     $('#modal-body').find('.be-the-first-msg').addClass('d-none');
     $('#errors').addClass('d-none');
 
-    $('#environment_<%= environment.id %>').html('<%= environment.status_message %>');
+    $('#environment_<%= environment.id %>').html('<%= status_message(environment) %>');
   <% end %>
 <% else %>
   $('#errors').removeClass('d-none');

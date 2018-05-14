@@ -21,6 +21,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.permit(:id, :environment_id, :from, :to)
+    params.permit(:id, :environment_id, :duration)
   end
 end

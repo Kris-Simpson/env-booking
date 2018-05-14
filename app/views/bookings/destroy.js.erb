@@ -1,7 +1,7 @@
 $('#booking-management-tbody').find('#booking_<%= @booking.id %>').remove();
 $('#errors').addClass('d-none');
 
-$('#environment_<%= @environment.id %>').html('<%= @environment.status_message %>');
+$('#environment_<%= @environment.id %>').html('<%= status_message(@environment) %>');
 
 <% unless @environment.bookings.present? %>
   $('#modal-body').find('table').addClass('d-none');

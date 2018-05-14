@@ -4,24 +4,23 @@ class Booking < ApplicationRecord
   belongs_to :environment
   belongs_to :user
 
-  validates :from, presence: true
-  validates :to, presence: true
+  validates :duration, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
-  validates_with TimeRangeValidator
+  before_create :set_until_field
 
-  validate :time_overlap, on: :create
+  scope :finished, -> { where.not(until: Time.current..DateTime::Infinity.new) }
+  scope :in_progress, -> { where(until: Time.current..DateTime::Infinity.new) }
+  scope :future, -> { in_progress.where.not(id: current&.id) }
 
-  scope :in_progress, -> { where(from: Time.current..DateTime::Infinity.new)
-                          .or(where(to: Time.current..DateTime::Infinity.new)) }
+  def self.current
+    in_progress.first
+  end
 
   private
 
-  def time_overlap
-    booking_time_ranges = self.class.where(environment: environment).select(:from, :to)
-    time_ranges = booking_time_ranges.map { |record| record.from..record.to }
+  def set_until_field
+    from = self.class.current&.until || Time.current
 
-    if time_ranges.any? { |range| range === (to - 1.second) or range === (from + 1.second) }
-      errors.add(:time_range, "can't overlap existing bookings")
-    end
+    self.until = from + duration.minutes
   end
 end
