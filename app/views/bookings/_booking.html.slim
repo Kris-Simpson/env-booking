@@ -1,0 +1,9 @@
+tr id=("booking_#{booking.id}")
+  td = booking.user.email
+  td = "From #{booking.from.strftime("%I:%M%P")} to #{booking.to.strftime("%I:%M%P")}"
+  td.text-center
+    - if current_user.bookings.include?(booking)
+      = link_to 'Cancel', booking_path(booking),
+                          method: :delete,
+                          remote: true,
+                          class: 'btn btn-sm btn-warning'

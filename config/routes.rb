@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :environments, only: :show
-  resources :booked_environments, only: %i(create destroy)
+  resources :bookings, only: %i(create destroy)
 end

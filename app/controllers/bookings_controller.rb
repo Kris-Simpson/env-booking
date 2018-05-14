@@ -1,6 +1,6 @@
-class BookedEnvironmentsController < ApplicationController
+class BookingsController < ApplicationController
   def create
-    @booking = current_user.booked_environments.create(booked_environment_params)
+    @booking = current_user.bookings.create(booking_params)
 
     respond_to do |format|
       format.html
@@ -9,7 +9,7 @@ class BookedEnvironmentsController < ApplicationController
   end
 
   def destroy
-    @booking = current_user.booked_environments.where(booked_environment_params).first.destroy
+    @booking = current_user.bookings.where(booking_params).first.destroy
     @environment = @booking.environment
 
     respond_to do |format|
@@ -20,7 +20,7 @@ class BookedEnvironmentsController < ApplicationController
 
   private
 
-  def booked_environment_params
+  def booking_params
     params.permit(:id, :environment_id, :from, :to)
   end
 end

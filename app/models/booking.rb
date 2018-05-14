@@ -1,4 +1,4 @@
-class BookedEnvironment < ApplicationRecord
+class Booking < ApplicationRecord
   include ActiveModel::Validations
 
   belongs_to :environment

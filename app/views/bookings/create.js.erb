@@ -3,7 +3,7 @@
 
   $('#booking-management-tbody').append("<%= j render @booking %>");
 
-  <% if environment.booked_environments.present? %>
+  <% if environment.bookings.present? %>
     $('#modal-body').find('table').removeClass('d-none');
     $('#modal-body').find('.be-the-first-msg').addClass('d-none');
     $('#errors').addClass('d-none');
