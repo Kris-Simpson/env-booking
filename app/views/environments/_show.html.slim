@@ -4,19 +4,20 @@
     span aria-hidden='true' &times;
 
 .modal-body#modal-body
-  table.table.table-striped class=('d-none' unless @bookings.present?)
+  table.table.table-striped class=('d-none' unless @environment.bookings.present?)
     thead.thead-dark
       tr
-        th.col-8 Booker
+        th.col-5 Booker
         th.col-2 Duration
+        th.col-3 End time
         th.col-2.text-center Action
 
     tbody#booking-management-tbody
-      = render @bookings.finished
-      = render @bookings.current || []
-      = render @bookings.future
+      = render @environment.bookings.finished
+      = render @environment.bookings.current || []
+      = render @environment.bookings.future
 
-  .be-the-first-msg.text-center class=('d-none' if @bookings.present?)
+  .be-the-first-msg.text-center class=('d-none' if @environment.bookings.present?)
     .text-muted Be the first who book this environment!
 
   .additional-top-mar

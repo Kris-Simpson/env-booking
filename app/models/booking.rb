@@ -8,9 +8,9 @@ class Booking < ApplicationRecord
 
   before_create :set_until_field
 
-  scope :finished, -> { where.not(until: Time.current..DateTime::Infinity.new) }
-  scope :in_progress, -> { where(until: Time.current..DateTime::Infinity.new) }
-  scope :future, -> { in_progress.where.not(id: current&.id) }
+  scope :finished, -> { where.not(until: Time.current..DateTime::Infinity.new).order(:created_at) }
+  scope :in_progress, -> { where(until: Time.current..DateTime::Infinity.new).order(:created_at) }
+  scope :future, -> { in_progress.where.not(id: current&.id).order(:created_at) }
 
   def self.current
     in_progress.first
@@ -19,7 +19,7 @@ class Booking < ApplicationRecord
   private
 
   def set_until_field
-    from = self.class.current&.until || Time.current
+    from = self.class.last&.until || Time.current
 
     self.until = from + duration.minutes
   end

@@ -22,4 +22,14 @@ module ApplicationHelper
       "#{environment.name} - full free after #{booking.until.strftime('%F %T')}"
     end
   end
+
+  def row_style(booking)
+    'table-' << if booking.until < Time.current
+      'secondary'
+    elsif Booking.current&.id == booking.id
+      'success'
+    else
+      'info'
+    end
+  end
 end
